@@ -1,46 +1,54 @@
 # AutoEditTest
 
-AutoEditTest is a coverage-guided semantic fuzzing framework for testing
-text-based image editing models.
+<p align="center">
+  <b>English</b> | <a href="./README_CN.md">简体中文</a>
+</p>
 
 ## Overview
 
+**AutoEditTest** is a coverage-guided semantic fuzzing framework for testing
+text-based image editing models.
+
 Text-based image editing models generate edited images according to natural
 language instructions. However, their open-ended outputs make it difficult to
-automatically generate valid test cases, explore diverse semantic behaviors,
-and identify editing failures without ground-truth reference images.
+generate valid test cases, explore diverse semantic behaviors, and identify
+editing failures without ground-truth reference images.
 
-AutoEditTest addresses these challenges through three main components:
+## Method
 
-1. **Target-Grounded Test Generation**  
-   Constructs image-editing instructions from the visual content of the target
-   region and its surrounding scene context, improving the semantic consistency,
-   executability, and checkability of generated test cases.
+AutoEditTest consists of four main stages:
 
-2. **Coverage-Guided Semantic Fuzzing**  
-   Represents editing requirements using atomic semantic buckets, including
-   object, color, count, material, shape, size, and spatial relation. Coverage
-   feedback guides subsequent generation toward under-explored semantic values.
+### 1. Target-Grounded Context Construction
 
-3. **Ground-Truth-Free Test Oracle**  
-   Uses a dual-branch oracle to detect editing failures. The non-target branch
-   checks whether unrelated image regions are preserved, while the target-side
-   branch converts editing requirements into structured Yes/No visual questions
-   to verify whether the requested edit has been correctly performed.
+AutoEditTest detects and segments the target object, then combines its category,
+visual description, and scene context to construct target-grounded multimodal
+information.
 
-## Framework
+### 2. Executable-and-Checkable Instruction Synthesis
 
-The AutoEditTest workflow contains four stages:
+Based on the target context and editing-task taxonomy, AutoEditTest generates
+natural-language editing instructions together with structured attribute records,
+ensuring that test inputs are semantically consistent, executable, and checkable.
 
-1. Target-grounded context construction
-2. Executable-and-checkable instruction synthesis
-3. Atomic-bucket coverage feedback
-4. Dual-branch ground-truth-free oracle
+### 3. Atomic-Bucket Coverage Feedback
+
+AutoEditTest decomposes editing requirements into atomic semantic buckets, such
+as object, color, count, material, shape, size, and spatial relation. Coverage
+feedback guides subsequent generation toward under-explored semantic values.
+
+### 4. Dual-Branch Ground-Truth-Free Oracle
+
+AutoEditTest detects editing failures through:
+
+- **Non-target preservation:** checks whether unrelated image regions are
+  unintentionally modified.
+- **Target-side alignment:** converts editing requirements into structured
+  Yes/No visual questions and verifies whether the requested edit is satisfied.
 
 ## Repository Status
 
-This repository currently provides an introduction to the AutoEditTest project.
-The source code and detailed documentation will be released later.
+This repository currently provides an introduction to AutoEditTest. Source code,
+experimental data, and detailed documentation will be released later.
 
 ## Contact
 
